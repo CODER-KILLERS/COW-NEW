@@ -16,17 +16,21 @@ Tool crack Facebook. Multi Bruteforce Publik
 <li><a href="https://www.instagram.com/latif176_">Instagram</a></li>
 <h1>Installed</h1>
 <h2>Install Tool</h2>
-```BASH
+<pre>
+<code>
 $ pkg install git
 $ git clone https://github.com/Latip176/cow3
 $ pkg install python
 $ pip install requirments.txt
-```
+</code>
+</pre>
 <h2>Menjalankan Tool</h2>
-```BASH
+<pre>
+<code>
 $ cd cow3
 $ python app.py
-```
+</code>
+</pre>
 <h1>terima kasih kepada</h1>
 <li>XNSCODE TEAM</li>
 <li>PYTHON SUKABUMI PROGRAMMERS</li>
