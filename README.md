@@ -1,7 +1,7 @@
-# cow3
-<img src="img/ss.jpg"></img><br/>
+<h1>Cow3</h1>
+<img src="img/Screenshot_20211123-213523_Pydroid 3.jpg"></img><br/>
 Tool crack Facebook. Multi Bruteforce Publik
-# keunggulan
+<h1>keunggulan</h1>
 <h2>1. Tampilan lebih bagus</h2>
 <p>Dibandingkan versi cow sebelumnya tampilan yang cow3 jauh lebih bagus menurut saya.</p>
 <h2>2. Mendapatkan hasil lebih banyak</h2>
@@ -14,6 +14,19 @@ Tool crack Facebook. Multi Bruteforce Publik
 <li><a href="https://latip176.my.id/">Website</a></li>
 <li><a href="https://www.facebook.com/latip176.my.id">Facebook</a></li>
 <li><a href="https://www.instagram.com/latif176_">Instagram</a></li>
+<h1>Installed</h1>
+<h2>Install Tool</h2>
+```BASH
+$ pkg install git
+$ git clone https://github.com/Latip176/cow3
+$ pkg install python
+$ pip install requirments.txt
+```
+<h2>Menjalankan Tool</h2>
+```BASH
+$ cd cow3
+$ python app.py
+```
 <h1>terima kasih kepada</h1>
 <li>XNSCODE TEAM</li>
 <li>PYTHON SUKABUMI PROGRAMMERS</li>
