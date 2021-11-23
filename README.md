@@ -9,10 +9,10 @@ Tool crack Facebook. Multi Bruteforce Publik
 <p>Di versi cow sebelumnya banyak sekali bug yang belum saya bereskan bahkan hingga saat ini. Akan tetapi di versi ini bug dan error sudah saya bereskan dan bahkan hanya sedikit saja. Jika menemukan bug atau error silahkan hubungi WhatsApp Latif.</p>
 <h2>4. Terdapat cp detector</h2>
 <p>Apa itu cp detector? Cp detector adalah tool untuk mengecek opsi checkpoint dari akun Facebook yang terkena checkpoint. Selengkapnya cek sc saya sebelumnya yang bernama cek_opsi_checkpoint.</p>
-# Social Media
+<h1>Social Media</h1>
 - <a href="https://latip176.my.id/">Website</a>
 - <a href="https://www.facebook.com/latip176.my.id">Facebook</a>
 - <a href="https://www.instagram.com/latif176_">Instagram</a>
-# terima kasih kepada
+<h1>terima kasih kepada</h1>
 - XNSCODE TEAM
 - PYTHON SUKABUMI PROGRAMMERS
