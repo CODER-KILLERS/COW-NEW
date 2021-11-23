@@ -10,9 +10,9 @@ Tool crack Facebook. Multi Bruteforce Publik
 <h2>4. Terdapat cp detector</h2>
 <p>Apa itu cp detector? Cp detector adalah tool untuk mengecek opsi checkpoint dari akun Facebook yang terkena checkpoint. Selengkapnya cek sc saya sebelumnya yang bernama cek_opsi_checkpoint.</p>
 <h1>Social Media</h1>
-- <a href="https://latip176.my.id/">Website</a>
-- <a href="https://www.facebook.com/latip176.my.id">Facebook</a>
-- <a href="https://www.instagram.com/latif176_">Instagram</a>
+<li><a href="https://latip176.my.id/">Website</a></li>
+<li><a href="https://www.facebook.com/latip176.my.id">Facebook</a></li>
+<li><a href="https://www.instagram.com/latif176_">Instagram</a></li>
 <h1>terima kasih kepada</h1>
-- XNSCODE TEAM
-- PYTHON SUKABUMI PROGRAMMERS
+<li>XNSCODE TEAM</li>
+<li>PYTHON SUKABUMI PROGRAMMERS</li>
