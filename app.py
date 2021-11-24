@@ -46,7 +46,7 @@ _________  ________  __      __________
 \
  \______  /\_______  /\__/\  / /______  /
         \/         \/      \/         \/ 
-	Version: 0.1.0
+	Version: 0.1.1
 	Coded by: Latip176
 		"""
 		return banner
@@ -183,7 +183,7 @@ class Crack(Main):
 		"sec-fetch-site":"same-origin",
 		"sec-fetch-user":"?1",
 		"upgrade-insecure-requests":"1",
-		"user-agent":"Mozilla/5.0 (Mobile; rv:48.0; A405DL) Gecko/48.0 Firefox/48.0 KAIOS/2.5"
+		"user-agent":"Mozilla/5.0 (Linux; Android 10; Mi 9T Pro Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.181 Mobile Safari/537.36 [FBAN/EMA;FBLC/id_ID;FBAV/239.0.0.10.109;]"
 		})
 		for pw in pwList:
 			pw = pw.lower()
