@@ -17,13 +17,13 @@ Tool crack Facebook. Multi Bruteforce Publik
 $ pkg install git
 $ git clone https://github.com/Latip176/cow3
 $ pkg install python
-$ pip install -r requirements.txt
 </code>
 </pre>
 <h2>Menjalankan Tool</h2>
 <pre>
 <code>
 $ cd cow3
+$ pip install -r requirements.txt
 $ python app.py
 </code>
 </pre>
