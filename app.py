@@ -47,7 +47,7 @@ _________  ________  __      __________
 \
  \______  /\_______  /\__/\  / /______  /
         \/         \/      \/         \/ 
-	Version: 0.1.1
+	Version: 0.1.2
 	Coded by: Latip176
 	Sponsore: Fatah Sewu
 		"""
@@ -71,6 +71,7 @@ _________  ________  __      __________
 		print("")
 		op = input("[?] Munculkan opsi [y/t]: ")
 		if op in ("y","Y"):
+			opsi.append("y")
 			ww=input("[?] Ubah pw ketika tap yes [y/t]: ")
 			if ww in ("y","ya"):
 				pwBar=input("[+] Masukan pw baru: ")
@@ -82,7 +83,6 @@ _________  ________  __      __________
 				return "y"
 			else:
 				print("> Skipped")
-			opsi.append("y")
 		print("\n[!] Akun hasik ok di save di ok.txt\n[!] Akun hasil cp di save di cp.txt\n")
 
 class Data(Main):
