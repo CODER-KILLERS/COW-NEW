@@ -69,7 +69,7 @@ class Eksekusi(Main):
 		if "c_user" in session.cookies.get_dict():
 			if "Akun Anda Dikunci" in urlPost.text:
 				if self.satua==True:
-					print(f"\r[OK] Akun aman			\n[=] {user} | {pw}					\n\n",end="")
+					print(f"\r\33[1;33m[CP] {self.user} | {self.pw}								\33[37;1m\n",end="")
 				print(f"\r[×] Akun sesi new					\n\n",end="")
 			else:
 				aman+=1
