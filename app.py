@@ -80,7 +80,6 @@ _________  ________  __      __________
 					exit("Password harus lebih dari 6 character!")
 				else:
 					pwBaru.append(pwBar)
-				return "y"
 			else:
 				print("> Skipped")
 		print("\n[!] Akun hasik ok di save di ok.txt\n[!] Akun hasil cp di save di cp.txt\n")
