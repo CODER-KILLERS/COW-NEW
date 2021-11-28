@@ -1,5 +1,5 @@
 <h1>Cow3</h1>
-<img src="img/Screenshot_20211125-010502_Pydroid 3.jpg"></img><br/>
+<img src="img/Screenshot_20211128-150048_Termux.jpg"></img><br/>
 Tool crack Facebook. Multi Bruteforce Publik Version: 0.1.2
 <h1>keunggulan</h1>
 <h2>1. Tampilan lebih bagus</h2>
