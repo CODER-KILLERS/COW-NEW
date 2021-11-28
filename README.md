@@ -9,6 +9,7 @@ Tool crack Facebook. Multi Bruteforce Publik Version: 0.1.2
 <h2>3. Fixed bug</h2>
 <p>Di versi cow sebelumnya banyak sekali bug yang belum saya bereskan bahkan hingga saat ini. Akan tetapi di versi ini bug dan error sudah saya bereskan dan bahkan hanya sedikit saja. Jika menemukan bug atau error silahkan hubungi WhatsApp Latif.</p>
 <h2>4. Terdapat cp detector</h2>
+<img src="img/Screenshot_20211128-152001_Termux.jpg"></img>
 <p>Apa itu cp detector? Cp detector adalah tool untuk mengecek opsi checkpoint dari akun Facebook yang terkena checkpoint. Selengkapnya cek sc saya sebelumnya yang bernama cek_opsi_checkpoint.</p>
 <h1>Installed</h1>
 <h2>Install Tool</h2>
