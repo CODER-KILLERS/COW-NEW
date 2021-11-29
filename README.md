@@ -34,4 +34,6 @@ $ python app.py
 <li><a href="https://www.instagram.com/latif176_">Instagram</a></li>
 <h1>terima kasih kepada</h1>
 <li>XNSCODE TEAM</li>
+<h1>Note!</h1>
+<p>Jika ingin mengambil beberapa fitur didalam sc ini silahkan kasih nama saya selaku Author. Dan harap meminta ijin terlebih dahulu.
 <li>PYTHON SUKABUMI PROGRAMMERS</li>
