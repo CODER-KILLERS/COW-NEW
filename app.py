@@ -56,7 +56,7 @@ _________  ________  __      __________
 \
  \______  /\_______  /\__/\  / /______  /
         \/         \/      \/         \/ 
-	Version: {BM}0.1.4{P}
+	Version: {BM}0.1.5{P}
   Coded by: Latip176, Sponsore: Fatah Sewu
 		"""
 		return banner
