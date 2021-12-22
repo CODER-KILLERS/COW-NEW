@@ -135,7 +135,7 @@ class Eksekusi(Main):
 					coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
 					if self.satua==True:
 						print(f"\r{H}[OK] {self.user}|{self.pw}|{coki}{P}        ",end="")
-					self.get_info(session,coki)
+					#self.get_info(session,coki)
 					self.cek_apk(session,coki)
 					
 		else:
@@ -160,7 +160,7 @@ class Eksekusi(Main):
 			coki = (";").join([ "%s=%s" % (key, value) for key, value in session.cookies.get_dict().items() ])
 			print(f"\r[√] Akun tap yes -> password diubah!\n{H}[=] {self.user}|{''.join(pwBaru)}|{coki}{P}\n",end="")
 			if "checkpoint" not in coki:
-				self.get_info(session,coki)
+				#self.get_info(session,coki)
 				self.cek_apk(session,coki)
 			else:
 				print("")
