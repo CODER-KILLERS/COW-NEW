@@ -165,9 +165,12 @@ class Eksekusi(Main):
 			else:
 				print("")
 	def get_info(self,session,coki):
+		get_id = session.get("https://mbasic.facebook.com/profile.php",cookies={"cookie":coki}).text
+		id = re.findall('\<a\ href\=\"\/profile\.php\?v\=info\&amp\;lst\=(\d+).*?\"\ class\=\".*?\"\>',str(get_id))[0]
+		nama = re.findall('\<title\>(.*?)<\/title\>',str(get_id))[0]
 		response = session.get("https://mbasic.facebook.com/profile.php?v=info",cookies={"cookie":coki}).text
 		response2 = session.get("https://mbasic.facebook.com/profile.php?v=friends",cookies={"cookie":coki}).text
-		response3 = session.get("https://mbasic.facebook.com/100062139475733/allactivity/?entry_point=settings_yfi&settings_tracking=unknown%3Asettings_2_0&privacy_source=your_facebook_information&_rdr",cookies={"cookie":coki}).text
+		response3 = session.get(f"https://mbasic.facebook.com/{id}/allactivity/?entry_point=settings_yfi&settings_tracking=unknown%3Asettings_2_0&privacy_source=your_facebook_information&_rdr",cookies={"cookie":coki}).text
 		try:
 			tahun = re.findall('\<a\ href\=\"\/\d+\/allactivity\/\?category\_key\=all&amp\;section\_id\=month\_2021\_2\&amp\;timestart\=.*?\"\>(.*?)<\/a>',str(response3))[-1]
 		except:
@@ -188,7 +191,7 @@ class Eksekusi(Main):
 			teman = re.findall('\<h3\ class\=\".*?\"\>Teman\ \((.*?)\)<\/h3\>',str(response2))[0]
 		except:
 			teman = ""
-		print(f"[{H}={P}] Tahun pembuatan: {K}{tahun}{P}\n[{H}={P}] Teman: {K}({teman}){P}\n[{H}={P}] Nomer-ponsel: {K}{nomer}{P}\n[{H}={P}] Email: {K}{email}{P}\n[{H}={P}] Tanggal-lahir: {K}{ttl}{P}")
+		print(f"[{H}={P}] Nama: {K}{nama}{P}\n[{H}={P}] Tahun pembuatan: {K}{tahun}{P}\n[{H}={P}] Teman: {K}({teman}){P}\n[{H}={P}] Nomer-ponsel: {K}{nomer}{P}\n[{H}={P}] Email: {K}{email}{P}\n[{H}={P}] Tanggal-lahir: {K}{ttl}{P}")
 	def cek_apk(self,session,coki):
 		hit1, hit2 = 0,0
 		cek =session.get("https://mbasic.facebook.com/settings/apps/tabbed/?tab=active",cookies={"cookie":coki}).text
