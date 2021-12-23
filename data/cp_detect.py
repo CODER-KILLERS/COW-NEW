@@ -166,13 +166,12 @@ class Eksekusi(Main):
 				print("")
 	def get_info(self,session,coki):
 		get_id = session.get("https://mbasic.facebook.com/profile.php",cookies={"cookie":coki}).text
-		id = re.findall('\<a\ href\=\"\/profile\.php\?v\=info\&amp\;lst\=(\d+).*?\"\ class\=\".*?\"\>',str(get_id))[0]
 		nama = re.findall('\<title\>(.*?)<\/title\>',str(get_id))[0]
 		response = session.get("https://mbasic.facebook.com/profile.php?v=info",cookies={"cookie":coki}).text
 		response2 = session.get("https://mbasic.facebook.com/profile.php?v=friends",cookies={"cookie":coki}).text
-		response3 = session.get(f"https://mbasic.facebook.com/{id}/allactivity/?entry_point=settings_yfi&settings_tracking=unknown%3Asettings_2_0&privacy_source=your_facebook_information&_rdr",cookies={"cookie":coki}).text
+		response3 = session.get(f"https://mbasic.facebook.com/{self.user}/allactivity/?entry_point=settings_yfi&settings_tracking=unknown%3Asettings_2_0&privacy_source=your_facebook_information&_rdr",cookies={"cookie":coki}).text
 		try:
-			tahun = re.findall('\<a\ href\=\"\/\d+\/allactivity\/\?category\_key\=all&amp\;section\_id\=month\_2021\_2\&amp\;timestart\=.*?\"\>(.*?)<\/a>',str(response3))[-1]
+			tahun = re.findall('\<a\ href\=\"\/\d+\/allactivity\/\?category\_key\=all&amp\;section\_id\=month\_.*?\_2\&amp\;timestart\=.*?\"\>(.*?)<\/a>',str(response3))[-1]
 		except:
 			tahun=""
 		try:
